@@ -1,0 +1,8 @@
+displayName = Hollow Vessel
+author = AndrewIDFK
+version = 0.1
+hideCode = true
+hideResources = true
+buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, lib\*, .git\*
+weakReferences = CalamityMod@1.4.2.107
+sortAfter = CalamityMod
