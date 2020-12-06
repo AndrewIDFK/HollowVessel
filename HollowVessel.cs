@@ -34,18 +34,4 @@ namespace HollowVessel
 		
 		public override void PostSetupContent()
         {
-            try
-            {
-                CalamityCompatibility = new CalamityCompatibility(this).TryLoad() as CalamityCompatibility;
-			}
-			catch (Exception e)
-            {
-                ErrorLogger.Log("Calamity PostSetupContent Error: " + e.StackTrace + e.Message);
-            }
-		}
-
-		internal CalamityCompatibility CalamityCompatibility { get; private set; }
-        internal bool CalamityLoaded => CalamityCompatibility != null;
-
-	}
 }
