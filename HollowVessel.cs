@@ -34,4 +34,6 @@ namespace HollowVessel
 		
 		public override void PostSetupContent()
         {
+		}
+	}
 }

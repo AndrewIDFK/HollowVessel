@@ -864,7 +864,7 @@ namespace HollowVessel
 				
 				for (int j = 0; j < 100; j++)
 				{
-					int num = Dust.NewDust(new Vector2(player.position.X, player.position.Y), player.width, player.height, 254, 0f, 0f, 0, Color.Black, 2f);
+					int num = Dust.NewDust(new Vector2(player.position.X, player.position.Y), player.width, player.height, 240, 0f, 0f, 0, Color.Black, 2f);
 					Dust dust = Main.dust[num];
 					dust.position.X = dust.position.X + (float)Main.rand.Next(-20, 21);
 					Dust dust2 = Main.dust[num];
@@ -884,26 +884,12 @@ namespace HollowVessel
 				}
 			}
 		}
-		
-		/*public override void PostSetupContent()
-        {
-            try
-            {
-                CalamityCompatibility = new CalamityCompatibility(this).TryLoad() as CalamityCompatibility;
-			}
-			catch (Exception e)
-            {
-                ErrorLogger.Log("HollowVessel PostSetupContent Error: " + e.StackTrace + e.Message);
-           }
-		}*/
-
-		//private readonly Mod calamity = ModLoader.GetMod("CalamityMod");
 
 
 		int resetDashSlashTimer;
 		public override void PostUpdateMiscEffects() 
 		{
-			
+			var modPlayer = Main.LocalPlayer.GetModPlayer<SoulMeterPlayer>();
 			if (!player.mount.Active)
 			{
 				if(player.HeldItem.type == mod.ItemType("DullNail"))
@@ -940,14 +926,25 @@ namespace HollowVessel
 				}
 				if(player.HeldItem.type == mod.ItemType("PureNail"))
 				{
-					//cloakDash = 2; //Crystal Heart
+					/*cloakDash = 2; //Crystal Heart
 					//shadeDash = 1; //Crystal Heart
 					shadeCloak = true;
-					//crystalHeart = true;
-					//monarchWings = true;
+					crystalHeart = true;*/
+					monarchWings = true;
 					mantisClaw = true;
 					dashSlash = true;
 					ismasTear = true;
+					
+					if(soulOrbActive)
+					{
+						cloakDash = 2;
+						crystalHeart = true;
+					}
+					else 
+					{
+						cloakDash = 1;
+						shadeCloak = true;
+					}
 					
 					//if Calamity is active, do stuff inside this, modPlayer takes calamityPlayer stuff and makes it usable here, some don't work cuz of weak references maybe? Or maybe im looking at a really old calamityplayer code for these.
 					/*if (HollowVessel.Instance.CalamityLoaded)
@@ -990,6 +987,27 @@ namespace HollowVessel
 						player.buffImmune[calamity.BuffType("Irradiated")] = true;
 						
 					}*/
+				}
+				
+				if(player.HeldItem.type == mod.ItemType("AeleNail"))
+				{
+					monarchWings = true; // Monarch Wings gives the player a double jump, right now it kinda looks like an invisible platform that the player jumps from for the 2nd jump, but eventually I'd like that to be a Winged jump similarly to Hollow Knight itself.
+					mantisClaw = true; // Mantis Claw gives the player the ability to climb walls and slide on walls, it's nothing special but it's useful and can be customized a bit more than the vanilla accessories that give you a similar ability.
+					dashSlash = true; // Dash Slash gives the player the ability to do a different, stronger version of the Great Slash while the player is dashing.
+					
+					ismasTear = true; // Isma's Tear gives the player all kinds of toxic immunities and other useful things, we might want to reimagine it because I don't see it being too useful in Terraria.
+					
+					if(soulOrbActive) //If the player has a Soul Orb, then instead of the normal dash there'll be a purple dash that makes you invincible during the dash and also damage enemies quite a bit. This is also the longest dash in the mod as of now.
+					{
+						cloakDash = 2; // Crystal Heart Dash
+						crystalHeart = true; // Makes invincibility and dust on Dash, so its gotta be true, you can make it more streamlined by using cloakDash == 2 instead of this probably, but right now I'm too lazy to test and change it, so suck it.
+					}
+					else // If the player doesn't have a Soul Orb then the player will do the basic Cloak Dash(Mothwing Cloak)
+					{
+						cloakDash = 1; // The basic Mothwing Cloak dash, it's not too long, doesn't give invincibility, doesnt do damage. However it does cancel out the players Y movement and resets the "fall counter" so the player could use a dash to save themselves from fall damage.
+						mothwingCloak = true; // Not gonna lie, I might actually make these bools for the dashes irrelevant and replace their functions with the dash Int(cloakDash/shadeDash) because it do be confusing, I've forgotten why I even made these when I couldve just used the cloakDash/shadeDash ints.
+						//shadeCloak = true; //Make this true only when the nail has Shade Cloak, also this isn't really finished cuz I havent started the Shade CLoak yet.
+					}
 				}
 				
 			}

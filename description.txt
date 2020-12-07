@@ -1,1 +1,6 @@
-Hollow Vessel is a pretty cool mod, it does...this. Modify this file with a description of your mod.
+Harness the power of the soul and use a relic of your forgotten past to defeat everyone who wants to oppose you.
+
+Credits:
+AndrewIDFK(Coder, Owner)
+Just Req(Coder, Cool Guy)
+Spriter(We need a Spriter)

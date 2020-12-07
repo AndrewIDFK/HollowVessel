@@ -101,11 +101,7 @@ namespace HollowVessel.Projectiles.Nails.PureNail
                     
                 }
             }
-            else
-            {
-				
-                projectile.Kill();
-            }
+            else projectile.Kill();
         
 			if (player.itemAnimation > (int)(8*(float)player.itemAnimationMax/9))
 			{
@@ -170,12 +166,18 @@ namespace HollowVessel.Projectiles.Nails.PureNail
         {
 			Player player = Main.player[projectile.owner];
 			Vector2 pos = player.RotatedRelativePoint(player.MountedCenter, true);
-            if (projectile.ai[0] > 120 && player.controlDown)
+			if (projectile.ai[0] > 120 && player.controlDown)
             {
                 //player.GetModPlayer<HollowPlayer>().desolateDive = true;
-                Projectile.NewProjectile(pos.X, pos.Y, player.direction, 0, mod.ProjectileType("DesolateDive"), 0, 0, projectile.owner);
+                Projectile.NewProjectile(pos.X, pos.Y, 0, 0, mod.ProjectileType("DesolateDive"), 0, 0, projectile.owner);
 				
             }
+			/*else if (projectile.ai[0] > 120 && player.controlUp)
+            {
+                //player.GetModPlayer<HollowPlayer>().desolateDive = true;
+                Projectile.NewProjectile(pos.X, pos.Y, player.direction, 0, mod.ProjectileType("HowlingWraiths"), projectile.damage * 15, projectile.knockBack * 10, projectile.owner);
+			
+            }*/
 			else if(projectile.ai[0] > 120)
             {
 				if(player.GetModPlayer<HollowPlayer>().dashSlashTimer >= 1)

@@ -23,7 +23,7 @@ namespace HollowVessel
 			if (projectile.owner == Main.myPlayer)
 			{
 				//Normal Nails
-				if(projectile.type == mod.ProjectileType("DamagedNail") || projectile.type == mod.ProjectileType("OldNail") || projectile.type == mod.ProjectileType("OldNail2") || projectile.type == mod.ProjectileType("DullNail") || projectile.type == mod.ProjectileType("DullNail") || projectile.type == mod.ProjectileType("SharpenedNail") || projectile.type == mod.ProjectileType("SharpenedNail2") || projectile.type == mod.ProjectileType("ChannelledNail") || projectile.type == mod.ProjectileType("ChannelledNail2") || projectile.type == mod.ProjectileType("CoiledNail") || projectile.type == mod.ProjectileType("CoiledNail2") || projectile.type == mod.ProjectileType("PellucidNail") || projectile.type == mod.ProjectileType("PellucidNail2") || projectile.type == mod.ProjectileType("PureNail") || projectile.type == mod.ProjectileType("PureNail2"))
+				if(projectile.type == mod.ProjectileType("DamagedNail") || projectile.type == mod.ProjectileType("OldNail") || projectile.type == mod.ProjectileType("OldNail2") || projectile.type == mod.ProjectileType("DullNail") || projectile.type == mod.ProjectileType("DullNail") || projectile.type == mod.ProjectileType("SharpenedNail") || projectile.type == mod.ProjectileType("SharpenedNail2") || projectile.type == mod.ProjectileType("ChannelledNail") || projectile.type == mod.ProjectileType("ChannelledNail2") || projectile.type == mod.ProjectileType("CoiledNail") || projectile.type == mod.ProjectileType("CoiledNail2") || projectile.type == mod.ProjectileType("PellucidNail") || projectile.type == mod.ProjectileType("PellucidNail2") || projectile.type == mod.ProjectileType("PureNail") || projectile.type == mod.ProjectileType("PureNail2") || projectile.type == mod.ProjectileType("AeleNail") || projectile.type == mod.ProjectileType("AeleNail2"))
 				{
 					var modPlayer = Main.LocalPlayer.GetModPlayer<SoulMeterPlayer>();
 					modPlayer.soulMeterCurrent += 3;
@@ -44,7 +44,7 @@ namespace HollowVessel
 				}
 				
 				//Nail Arts
-				if(projectile.type == mod.ProjectileType("OldNailSlash") || projectile.type == mod.ProjectileType("DullNailSlash") || projectile.type == mod.ProjectileType("SharpenedNailSlash") || projectile.type == mod.ProjectileType("ChannelledNailSlash") || projectile.type == mod.ProjectileType("CoiledNailSlash") || projectile.type == mod.ProjectileType("PellucidNailSlash") || projectile.type == mod.ProjectileType("PellucidDashSlash") || projectile.type == mod.ProjectileType("PureNailSlash") || projectile.type == mod.ProjectileType("PureDashSlash"))
+				if(projectile.type == mod.ProjectileType("OldNailSlash") || projectile.type == mod.ProjectileType("DullNailSlash") || projectile.type == mod.ProjectileType("SharpenedNailSlash") || projectile.type == mod.ProjectileType("ChannelledNailSlash") || projectile.type == mod.ProjectileType("CoiledNailSlash") || projectile.type == mod.ProjectileType("PellucidNailSlash") || projectile.type == mod.ProjectileType("PellucidDashSlash") || projectile.type == mod.ProjectileType("PureNailSlash") || projectile.type == mod.ProjectileType("PureDashSlash") || projectile.type == mod.ProjectileType("AeleDashSlash") || projectile.type == mod.ProjectileType("AeleNailSlash") || projectile.type == mod.ProjectileType("AeleNailCyclone"))
 				{
 					var modPlayer = Main.LocalPlayer.GetModPlayer<SoulMeterPlayer>();
 					modPlayer.soulMeterCurrent += 11;

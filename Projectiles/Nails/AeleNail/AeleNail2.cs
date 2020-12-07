@@ -3,20 +3,20 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace HollowVessel.Projectiles.Nails.PureNail
+namespace HollowVessel.Projectiles.Nails.AeleNail
 {
-    public class PureNail : ModProjectile
+    public class AeleNail2 : ModProjectile
     {
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Pure Nail");
-            Main.projFrames[projectile.type] = 9;
+			DisplayName.SetDefault("Aele Nail 2");
+            Main.projFrames[projectile.type] = 8;
 		}
         public override void SetDefaults()
         {
             projectile.width = 66;
             projectile.height = 66;
-           // projectile.scale = 1.2f;
+          //  projectile.scale = 1.25f;
             projectile.friendly = true;
             projectile.penetrate = -1;
             projectile.tileCollide = false;
@@ -26,13 +26,11 @@ namespace HollowVessel.Projectiles.Nails.PureNail
             projectile.usesLocalNPCImmunity = true;
 			projectile.localNPCHitCooldown = -1;
         }
-		
         public override bool? CanHitNPC(NPC target)
 		{
             Player player = Main.player[projectile.owner];
 			return !target.friendly && player.itemAnimation > 1;
 		}
-
         public override bool PreAI()
         {
             Player player = Main.player[projectile.owner];
@@ -71,6 +69,7 @@ namespace HollowVessel.Projectiles.Nails.PureNail
                     {
                         Main.PlaySound(2, (int)projectile.position.X, (int)projectile.position.Y, 13);
                     }
+					
 					Vector2 circularMotion = new Vector2(player.width / 1.25f, player.height / 1.25f) * projectile.scale * 1.15f;
 					circularMotion /= 2f;
 					Vector2 realCircularMotion = Vector2.UnitY.RotatedByRandom(6.2831854820251465) * circularMotion;
@@ -83,7 +82,9 @@ namespace HollowVessel.Projectiles.Nails.PureNail
 						Main.dust[numDust].velocity.Y = player.velocity.Y / 2;
 						Main.dust[numDust].scale = 1.15f;
 						Main.dust[numDust].noGravity = true;
-						Main.dust[numDust].fadeIn *= 0.1f;	
+						Main.dust[numDust].fadeIn *= 0.1f;
+						
+						
 					}
                 }
                 if (projectile.ai[0] == 120)
@@ -155,6 +156,7 @@ namespace HollowVessel.Projectiles.Nails.PureNail
 
             return false;
         }
+		
   		public override void OnHitNPC(NPC target, int damage, float knockBack, bool crit)
 		{
 			Player player = Main.player[projectile.owner];
@@ -168,31 +170,35 @@ namespace HollowVessel.Projectiles.Nails.PureNail
         {
 			Player player = Main.player[projectile.owner];
 			Vector2 pos = player.RotatedRelativePoint(player.MountedCenter, true);
-            if (projectile.ai[0] > 120 && player.controlDown)
+			if (projectile.ai[0] > 120 && player.controlDown && player.velocity.Y == 0)
+            {
+                Projectile.NewProjectile(pos.X, pos.Y, player.direction, 0, mod.ProjectileType("AeleNailCyclone"), projectile.damage * 5, projectile.knockBack * 8, projectile.owner);
+            }
+			else if (projectile.ai[0] > 120 && player.controlDown && player.velocity.Y != 0)
             {
                 //player.GetModPlayer<HollowPlayer>().desolateDive = true;
                 Projectile.NewProjectile(pos.X, pos.Y, player.direction, 0, mod.ProjectileType("DesolateDive"), 0, 0, projectile.owner);
 				
             }
-			/*else if (projectile.ai[0] > 120 && player.controlUp)
+			else if (projectile.ai[0] > 120 && player.controlUp)
             {
                 //player.GetModPlayer<HollowPlayer>().desolateDive = true;
                 Projectile.NewProjectile(pos.X, pos.Y, player.direction, 0, mod.ProjectileType("HowlingWraiths"), projectile.damage * 15, projectile.knockBack * 10, projectile.owner);
-			
-            }*/
+				
+            }
 			else if(projectile.ai[0] > 120)
             {
 				if(player.GetModPlayer<HollowPlayer>().dashSlashTimer >= 1)
 				{
 					player.GetModPlayer<HollowPlayer>().shakeTimer = 20;
-					Projectile.NewProjectile(pos.X, pos.Y, player.direction, 0, mod.ProjectileType("PureDashSlash"), projectile.damage * 12, projectile.knockBack * 8, projectile.owner);
+					Projectile.NewProjectile(pos.X, pos.Y, player.direction, 0, mod.ProjectileType("AeleDashSlash"), projectile.damage * 12, projectile.knockBack * 8, projectile.owner);
 					player.GetModPlayer<HollowPlayer>().dashSlashTimer = 0;
 				}
 				else
 				{
 					Main.PlaySound(2, (int)projectile.position.X, (int)projectile.position.Y, 74);	
 					player.GetModPlayer<HollowPlayer>().shakeTimer = 10;
-					Projectile.NewProjectile(pos.X, pos.Y, projectile.velocity.X * 2, projectile.velocity.Y * 2, mod.ProjectileType("PureNailSlash"), projectile.damage * 10, projectile.knockBack * 6, projectile.owner);
+					Projectile.NewProjectile(pos.X, pos.Y, projectile.velocity.X * 2, projectile.velocity.Y * 2, mod.ProjectileType("AeleNailSlash"), projectile.damage * 10, projectile.knockBack * 6, projectile.owner);
 				}
             }
         }

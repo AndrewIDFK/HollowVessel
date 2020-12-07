@@ -162,10 +162,19 @@ namespace HollowVessel.Projectiles.Nails.CoiledNail
             }
 			else if(projectile.ai[0] > 120)
             {
-                Main.PlaySound(2, (int)projectile.position.X, (int)projectile.position.Y, 74);	
-				player.GetModPlayer<HollowPlayer>().shakeTimer = 10;
-                Projectile.NewProjectile(pos.X, pos.Y, projectile.velocity.X * 2, projectile.velocity.Y * 2, mod.ProjectileType("CoiledNailSlash"), projectile.damage * 10, projectile.knockBack * 6, projectile.owner);
-            }
+				if(player.GetModPlayer<HollowPlayer>().dashSlashTimer >= 1)
+				{
+					player.GetModPlayer<HollowPlayer>().shakeTimer = 20;
+					Projectile.NewProjectile(pos.X, pos.Y, player.direction, 0, mod.ProjectileType("CoiledDashSlash"), projectile.damage * 12, projectile.knockBack * 8, projectile.owner);
+					player.GetModPlayer<HollowPlayer>().dashSlashTimer = 0;
+				}
+				else
+				{
+					Main.PlaySound(2, (int)projectile.position.X, (int)projectile.position.Y, 74);	
+					player.GetModPlayer<HollowPlayer>().shakeTimer = 10;
+					Projectile.NewProjectile(pos.X, pos.Y, projectile.velocity.X * 2, projectile.velocity.Y * 2, mod.ProjectileType("CoiledNailSlash"), projectile.damage * 10, projectile.knockBack * 6, projectile.owner);
+				}
+			}
         }
     }
 }
